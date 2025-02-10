@@ -14,5 +14,7 @@ rule filter_sequences:
         fasta=os.path.join(DATA_DIR, "{sample}.fasta")
     output:
         filtered_fasta=os.path.join(FILTERED_DIR, "{sample}.filtered.fasta")
+    conda:
+        "environment.yml"
     shell:
         "seqkit seq -M 100 {input.fasta} > {output.filtered_fasta}"
