@@ -1,13 +1,18 @@
+import os
+
+DATA_DIR = "data"
+FILTERED_DIR = "filtered"
+
+samples = [os.path.splitext(f)[0] for f in os.listdir(DATA_DIR) if f.endswith(".fasta")]
+
 rule all:
     input:
-        expand("filtered/{file}", file=glob_wildcards("data/*.fasta").file)
+        expand(os.path.join(FILTERED_DIR, "{sample}.filtered.fasta"), sample=samples)
 
 rule filter_sequences:
     input:
-        "data/{file}.fasta"
+        fasta=os.path.join(DATA_DIR, "{sample}.fasta")
     output:
-        "filtered/{file}.fasta"
+        filtered_fasta=os.path.join(FILTERED_DIR, "{sample}.filtered.fasta")
     shell:
-        """
-        seqkit seq -m 100 {input} > {output}
-        """
+        "seqkit seq -M 100 {input.fasta} > {output.filtered_fasta}"
