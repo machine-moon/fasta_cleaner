@@ -12,4 +12,4 @@
 #SBATCH --comment="first"
 
 source /gpfs/fs7/aafc/common/miniforge/miniforge3/etc/profile.d/conda.sh
-snakemake --use-conda --conda-prefix /gpfs/fs7/aafc/labs/bicoe_lab/workspace/tai000/envs --cores 2
+snakemake --use-conda --conda-prefix /gpfs/fs7/aafc/labs/bicoe_lab/workspace/tai000/environments --cores 2
